@@ -1,9 +1,17 @@
 package com.cg.online.UI;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.text.DateFormatter;
 
 import com.cg.online.dto.OnlineBean;
 import com.cg.online.service.IOnlineService;
@@ -15,7 +23,8 @@ public class OnlineUI {
 
 	static Scanner sc=new Scanner(System.in);
 	static IOnlineService service=new OnlineServiceImpl();
-	public static void main(String[] args) throws SQLException, IOException {
+	static OnlineBean bean=new OnlineBean();
+	public static void main(String[] args) throws SQLException, IOException, ParseException {
 		System.out.println("Online Banking Sytem");
 		System.out.println("-------------------");
 		while(true)
@@ -35,8 +44,21 @@ public class OnlineUI {
 			}
 		}
 	}
-	private static void viewMiniStatement() throws SQLException, IOException {
-		ArrayList<OnlineBean> list=service.retriveDetails();
+	private static void viewMiniStatement() throws SQLException, IOException, ParseException {
+		System.out.println("Enter the account id");
+		int id=sc.nextInt();
+		bean.setAccountNumber(id);
+		System.out.println("Enter the starting date");
+		String sd=sc.next();
+		 DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+		 LocalDate sdate=LocalDate.parse(sd,formatter);
+		 Date startdate=Date.valueOf(sdate);
+		 System.out.println("Enter the end date");
+			String ed=sc.next();
+		 DateTimeFormatter formatterr =  DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+		 LocalDate edate=LocalDate.parse(ed,formatterr);
+		 Date enddate=Date.valueOf(sdate);
+		ArrayList<OnlineBean> list=service.retriveDetails(id,startdate,enddate);
 		for(OnlineBean m:list)
 		{
 			System.out.println(m.getTransactionId());
@@ -44,7 +66,7 @@ public class OnlineUI {
 			System.out.println(m.getDateOfTransaction());
 			System.out.println(m.getTransactionType());
 			System.out.println(m.getTransactionamount());
-			System.out.println(m.getAccountNumber());
+			
 		}
 	}
 }

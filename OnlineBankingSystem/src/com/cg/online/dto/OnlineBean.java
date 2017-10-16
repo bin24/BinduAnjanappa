@@ -66,14 +66,14 @@ public class OnlineBean {
 
 	public OnlineBean(int transactionId, String transactionDescription,
 			Date dateOfTransaction, String transactionType,
-			int transactionamount, int accountNumber) {
+			int transactionamount) {
 		super();
 		this.transactionId = transactionId;
 		this.transactionDescription = transactionDescription;
 		DateOfTransaction = dateOfTransaction;
 		this.transactionType = transactionType;
 		this.transactionamount = transactionamount;
-		this.accountNumber = accountNumber;
+		
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.cg.online.service;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -12,8 +13,8 @@ public class OnlineServiceImpl implements IOnlineService {
 
 	IOnlineDao dao=new OnlineDaoImpl();
 	@Override
-	public ArrayList<OnlineBean> retriveDetails() throws SQLException, IOException {
-		 ArrayList<OnlineBean> al=dao.retriveDetails();
+	public ArrayList<OnlineBean> retriveDetails(int id, Date startdate, Date enddate) throws SQLException, IOException {
+		 ArrayList<OnlineBean> al=dao.retriveDetails(id,startdate,enddate);
 		 return al;
 	}
 
