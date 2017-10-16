@@ -5,64 +5,43 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 
 import com.cg.banking.bean.UserBean;
-import com.cg.banking.dbUtil.DbUtil;
-
+import com.cg.banking.dbUtil.dbUtil;
 
 
 public class BankingDaoImpl implements IBankingDao {
-	
-	Connection conn=null;
-	int loginId1=0;
-	String password=null;
-	
-
-	
-
 
 	@Override
-	public boolean checkLogin(UserBean bean) throws IOException, SQLException 
-	{
-
-		conn=DbUtil.getConnection();
+	public int createNewAcc(UserBean ub) throws IOException, SQLException {
+		int nr = 0;
+		Connection con = dbUtil.getConnection();
+		
+		String str = "INSERT Into Account_Master values(Account_id.nextval,?,?,?,?,?,?,?)";
+		PreparedStatement pst = con.prepareStatement(str);
+		pst.setString(1,ub.getName());
+		pst.setInt(2,ub.getAcctype());
+		pst.setInt(3,ub.getAccbal());
+		pst.setString(4,ub.getDate());
+		pst.setString(5,ub.getAddress());
+		pst.setString(6,ub.getMobileno());
+		pst.setString(7,ub.getEmail());
+		nr = pst.executeUpdate();
+		int accid = 0;
+		//System.out.println(nr);
 		
 		
+			String sql = "select Account_id.currval from Account_Master";
+			Statement st = con.createStatement();
+			ResultSet r = st.executeQuery(sql);
+			while(r.next())
+			{
+				accid = r.getInt(1);
+			}
 		
-		
-		String sql="Select * from user_details where user_id=?";
-		
-		PreparedStatement pst=conn.prepareStatement(sql);
-		
-		pst.setInt(1,bean.getUserId());
-		
-		
-		ResultSet rs=pst.executeQuery();
-		
-		while(rs.next())
-		{
-			
-			 loginId1=rs.getInt(2);
-			 
-			 password=rs.getString(3);
-			
-		}
-		
-		if(bean.getUserId()==loginId1 && bean.getLoginPassword().equals(password))
-		{
-			System.out.println("true");
-			return true;
-		}
-		else
-		{
-			System.out.println("false");
-			return false;
-		}
-		
-		
+		//System.out.println("ID is "+);
+		return accid;
 	}
-	
-	
 
 }

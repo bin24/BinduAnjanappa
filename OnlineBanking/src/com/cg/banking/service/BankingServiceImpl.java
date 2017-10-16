@@ -8,20 +8,12 @@ import com.cg.banking.dao.BankingDaoImpl;
 import com.cg.banking.dao.IBankingDao;
 
 
-
 public class BankingServiceImpl implements IBankingService {
-	
-	IBankingDao dao=null;
-
-	
 
 	@Override
-	public boolean checkLogin(UserBean bean) throws IOException, SQLException {
-		dao=new BankingDaoImpl();
-		
-		return dao.checkLogin(bean);
+	public int createNewAcc(UserBean ub) throws IOException, SQLException {
+		IBankingDao ibd = new BankingDaoImpl();
+		return ibd.createNewAcc(ub);
 	}
-
-	
 
 }

@@ -1,98 +1,97 @@
 package com.cg.banking.bean;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 public class UserBean {
-	
-	private long accountId;
-	private int userId;
-	private String loginPassword;
-	private String secretQuestion;
-	private String secretQuestionAnswer;
-	private String transactionPassword;
-	private String lockStatus;
-	
-	public long getAccountId() {
-		return accountId;
-	}
-	public void setAccountId(long accountId) {
-		this.accountId = accountId;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	public String getLoginPassword() {
-		return loginPassword;
-	}
-	public void setLoginPassword(String loginPassword) {
-		this.loginPassword = loginPassword;
-	}
-	public String getSecretQuestion() {
-		return secretQuestion;
-	}
-	public void setSecretQuestion(String secretQuestion) {
-		this.secretQuestion = secretQuestion;
-	}
-	public String getSecretQuestionAnswer() {
-		return secretQuestionAnswer;
-	}
-	public void setSecretQuestionAnswer(String secretQuestionAnswer) {
-		this.secretQuestionAnswer = secretQuestionAnswer;
-	}
-	public String getTransactionPassword() {
-		return transactionPassword;
-	}
-	public void setTransactionPassword(String transactionPassword) {
-		this.transactionPassword = transactionPassword;
-	}
-	public String getLockStatus() {
-		return lockStatus;
-	}
-	public void setLockStatus(String lockStatus) {
-		this.lockStatus = lockStatus;
-	}
-	
-	
-	public UserBean(long accountId, int userId, String loginPassword,
-			String secretQuestion, String secretQuestionAnswer,
-			String transactionPassword, String lockStatus) {
+	private int accid;
+	private String name;
+	private int acctype;
+	private int accbal;
+	private String date;
+	private String address;
+	private String mobileno;
+	private String email;
+	public UserBean(int accid, String name, int acctype, int accbal,
+			String date, String address, String mobileno, String email) {
 		super();
-		this.accountId = accountId;
-		this.userId = userId;
-		this.loginPassword = loginPassword;
-		this.secretQuestion = secretQuestion;
-		this.secretQuestionAnswer = secretQuestionAnswer;
-		this.transactionPassword = transactionPassword;
-		this.lockStatus = lockStatus;
+		this.accid = accid;
+		this.name = name;
+		this.acctype = acctype;
+		this.accbal = accbal;
+		this.date = date;
+		this.address = address;
+		this.mobileno = mobileno;
+		this.email = email;
 	}
-	
-	public UserBean()
-	{
-		
-		
-	}
-	
-	
-	
-	public UserBean(int userId, String loginPassword) {
+	public UserBean(String name, int acctype, int accbal, String date,
+			String address, String mobileno, String email) {
 		super();
-		this.userId = userId;
-		this.loginPassword = loginPassword;
+		this.name = name;
+		this.acctype = acctype;
+		this.accbal = accbal;
+		this.date = date;
+		this.address = address;
+		this.mobileno = mobileno;
+		this.email = email;
+	}
+	public UserBean() {
 		
+	}
+	public int getAccid() {
+		return accid;
+	}
+	public void setAccid(int accid) {
+		this.accid = accid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAcctype() {
+		return acctype;
+	}
+	public void setAcctype(int acctype) {
+		this.acctype = acctype;
+	}
+	public int getAccbal() {
+		return accbal;
+	}
+	public void setAccbal(int accbal) {
+		this.accbal = accbal;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getMobileno() {
+		return mobileno;
+	}
+	public void setMobileno(String mobileno) {
+		this.mobileno = mobileno;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	@Override
 	public String toString() {
-		return "UserBean [accountId=" + accountId + ", userId=" + userId
-				+ ", loginPassword=" + loginPassword + ", secretQuestion="
-				+ secretQuestion + ", secretQuestionAnswer="
-				+ secretQuestionAnswer + ", transactionPassword="
-				+ transactionPassword + ", lockStatus=" + lockStatus + "]";
+		return "UserBean [accid=" + accid + ", name=" + name + ", acctype="
+				+ acctype + ", accbal=" + accbal + ", date=" + date
+				+ ", address=" + address + ", mobileno=" + mobileno
+				+ ", email=" + email + "]";
 	}
 	
-	
-	
-	
-
-
 }

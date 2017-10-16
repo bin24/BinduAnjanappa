@@ -7,8 +7,6 @@ import com.cg.banking.bean.UserBean;
 
 public interface IBankingService {
 
-	
-	public boolean checkLogin(UserBean bean) throws IOException, SQLException;
-
+	int createNewAcc(UserBean ub) throws IOException, SQLException;
 
 }

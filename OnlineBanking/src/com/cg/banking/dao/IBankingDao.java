@@ -6,9 +6,7 @@ import java.sql.SQLException;
 import com.cg.banking.bean.UserBean;
 
 public interface IBankingDao {
-	
-	
-	public boolean checkLogin(UserBean bean) throws IOException, SQLException;
 
-	
+	int createNewAcc(UserBean ub) throws IOException, SQLException;
+
 }
