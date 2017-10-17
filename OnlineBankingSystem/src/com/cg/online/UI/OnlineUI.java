@@ -3,15 +3,13 @@ package com.cg.online.UI;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.DateFormat;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.text.DateFormatter;
 
 import com.cg.online.dto.OnlineBean;
 import com.cg.online.service.IOnlineService;
@@ -50,15 +48,32 @@ public class OnlineUI {
 		bean.setAccountNumber(id);
 		System.out.println("Enter the starting date");
 		String sd=sc.next();
-		 DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MMM/yyyy");
-		 LocalDate sdate=LocalDate.parse(sd,formatter);
-		 Date startdate=Date.valueOf(sdate);
+		
+		/*SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+	     java.util.Date date1 = sdf.parse(sd);
+	     sdf.applyPattern("dd-MMM-yyyy");
+	     System.out.println(sdf.format(date1));
+		
+		*/
+	
+		
+	 DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+		 
+	 LocalDate sdate=LocalDate.parse(sd,formatter);
+	
+		 
 		 System.out.println("Enter the end date");
-			String ed=sc.next();
-		 DateTimeFormatter formatterr =  DateTimeFormatter.ofPattern("dd/MMM/yyyy");
-		 LocalDate edate=LocalDate.parse(ed,formatterr);
-		 Date enddate=Date.valueOf(sdate);
-		ArrayList<OnlineBean> list=service.retriveDetails(id,startdate,enddate);
+		 String ed=sc.next();
+		 LocalDate edate=LocalDate.parse(ed,formatter);
+		 System.out.println(edate);
+			 
+		 Date enddate=Date.valueOf(edate);
+		 System.out.println(enddate);
+			 
+
+		// LocalDate edate=LocalDate.parse(ed,formatter);
+		// Date enddate=Date.valueOf(sdate);
+		ArrayList<OnlineBean> list=service.retriveDetails(id,sdate,edate);
 		for(OnlineBean m:list)
 		{
 			System.out.println(m.getTransactionId());
