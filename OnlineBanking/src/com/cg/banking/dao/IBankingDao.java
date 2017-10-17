@@ -5,16 +5,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.cg.banking.bean.UserBean;
-import com.cg.banking.bean.UserBean1;
+
 
 public interface IBankingDao {
+	
+	
+	public boolean checkLogin(UserBean bean) throws IOException, SQLException;
 
-	int createNewAcc(UserBean ub) throws IOException, SQLException;
-
-	ArrayList<UserBean1> reteriveDaily() throws IOException, SQLException;
-
-	ArrayList<UserBean1> reteriveMonthly() throws IOException, SQLException;
-
-	ArrayList<UserBean1> reteriveYearly() throws IOException, SQLException;
-
+	public ArrayList<UserBean> changePassword(UserBean bean) throws IOException, SQLException;
+	
+	public int updatePassword(UserBean bean) throws SQLException, IOException;
 }

@@ -5,16 +5,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.cg.banking.bean.UserBean;
-import com.cg.banking.bean.UserBean1;
 
 public interface IBankingService {
 
-	int createNewAcc(UserBean ub) throws IOException, SQLException;
+	
+	public boolean checkLogin(UserBean bean) throws IOException, SQLException;
 
-	ArrayList<UserBean1> reteriveDaily() throws IOException, SQLException;
+	public ArrayList<UserBean> changePassword(UserBean bean) throws IOException, SQLException;
 
-	ArrayList<UserBean1> reteriveMonthly() throws IOException, SQLException;
+	
 
-	ArrayList<UserBean1> reteriveYearly() throws IOException, SQLException;
+	
 
+	public boolean checkSecurityAnswer(String securityQuestion,String securityAnswer, String sAnswer);
+	
+	
+	public int updatePassword(UserBean bean) throws SQLException, IOException;
+
+	public boolean checkPassword(String newPassword, String reEnterNewPassword);
 }

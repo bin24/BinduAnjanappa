@@ -5,40 +5,85 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.cg.banking.bean.UserBean;
-import com.cg.banking.bean.UserBean1;
 import com.cg.banking.dao.BankingDaoImpl;
 import com.cg.banking.dao.IBankingDao;
 
 
+
 public class BankingServiceImpl implements IBankingService {
+	
+	IBankingDao dao=null;
+
+	
 
 	@Override
-	public int createNewAcc(UserBean ub) throws IOException, SQLException {
-		IBankingDao ibd = new BankingDaoImpl();
-		return ibd.createNewAcc(ub);
+	public boolean checkLogin(UserBean bean) throws IOException, SQLException {
+		dao=new BankingDaoImpl();
+		
+		return dao.checkLogin(bean);
 	}
 
-	@Override
-	public ArrayList<UserBean1> reteriveDaily() throws IOException, SQLException {
-		// TODO Auto-generated method stub
-		IBankingDao ibd = new BankingDaoImpl();
-		return ibd.reteriveDaily();
-	}
+
 
 	@Override
-	public ArrayList<UserBean1> reteriveMonthly() throws IOException, SQLException {
-		// TODO Auto-generated method stub
-		IBankingDao ibd = new BankingDaoImpl();
-		return ibd.reteriveMonthly();
+	public ArrayList<UserBean> changePassword(UserBean bean) throws IOException, SQLException {
+		dao=new BankingDaoImpl();
+		
+		return dao.changePassword(bean);
+	}
+
+
+
+	@Override
+	public boolean checkSecurityAnswer(String securityQuestion,
+			String securityAnswer, String sAnswer) {
+		
+		if(securityAnswer.equals(sAnswer))
+		{
+			
+			return true;
+		}
+		else
+		{
+			
+			return false;
+		}
 		
 	}
 
+
+
 	@Override
-	public ArrayList<UserBean1> reteriveYearly() throws IOException, SQLException {
-		// TODO Auto-generated method stub
-		IBankingDao ibd = new BankingDaoImpl();
-		return ibd.reteriveYearly();
+	public int updatePassword(UserBean bean) throws SQLException, IOException {
+		dao=new BankingDaoImpl();
+		
+		return dao.updatePassword(bean);
+	}
+
+
+
+	@Override
+	public boolean checkPassword(String newPassword, String reEnterNewPassword) {
+		
+		if(newPassword.equals(reEnterNewPassword))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 		
 	}
+
+
+
+	
+
+
+
+	
+
+	
 
 }
