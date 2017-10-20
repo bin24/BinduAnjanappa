@@ -23,4 +23,8 @@ public interface IBankingService {
 	public int updatePassword(UserBean bean) throws SQLException, IOException;
 
 	public boolean checkPassword(String newPassword, String reEnterNewPassword);
+	
+	
+	
+	public int updateLock(UserBean bean) throws IOException, SQLException;
 }

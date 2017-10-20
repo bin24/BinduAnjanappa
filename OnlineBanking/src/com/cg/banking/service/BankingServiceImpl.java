@@ -78,6 +78,15 @@ public class BankingServiceImpl implements IBankingService {
 
 
 
+	@Override
+	public int updateLock(UserBean bean) throws IOException, SQLException {
+		dao=new BankingDaoImpl();
+		
+		return dao.updateLock(bean);
+	}
+
+
+
 	
 
 

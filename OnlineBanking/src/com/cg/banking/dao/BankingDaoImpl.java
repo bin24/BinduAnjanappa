@@ -28,8 +28,7 @@ public class BankingDaoImpl implements IBankingDao {
 	@Override
 	public boolean checkLogin(UserBean bean) throws IOException, SQLException 
 	{
-		int loginId1=0;
-		String password=null;
+		
 		
 		conn=DbUtil.getConnection();
 		
@@ -50,9 +49,7 @@ public class BankingDaoImpl implements IBankingDao {
 			return false;
 		}
 		else
-		{
-			rs.getString(7);
-			
+		{		
 			if(rs.getString(7).equals("N"))
 			{
 				return false;
@@ -136,6 +133,35 @@ public class BankingDaoImpl implements IBankingDao {
 		
 		int result=ps.executeUpdate();
 		return result;
+	}
+
+
+
+
+
+	@Override
+	public int updateLock(UserBean bean) throws IOException, SQLException {
+		
+		conn=DbUtil.getConnection();
+		String updateQuery="update user_details set lock_status=? where user_id=?";
+		
+		
+		
+		PreparedStatement ps=conn.prepareStatement(updateQuery);
+		
+		
+	
+			ps.setString(1,"N");
+			
+			ps.setInt(2,bean.getUserId());
+		
+		
+		
+		int lockResult=ps.executeUpdate();
+		return lockResult;
+		
+		
+		
 	}
 	
 	
