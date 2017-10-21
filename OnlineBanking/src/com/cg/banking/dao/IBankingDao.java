@@ -17,4 +17,6 @@ public interface IBankingDao {
 	public int updatePassword(UserBean bean) throws SQLException, IOException;
 	
 	public int updateLock(UserBean bean) throws IOException, SQLException;
+
+	public ArrayList<UserBean> getAccountId(UserBean bean) throws IOException, SQLException;
 }

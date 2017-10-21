@@ -163,6 +163,41 @@ public class BankingDaoImpl implements IBankingDao {
 		
 		
 	}
+
+
+
+
+
+	@Override
+	public ArrayList<UserBean> getAccountId(UserBean bean) throws IOException, SQLException {
+		
+		long accountId=0;
+		
+		ArrayList<UserBean> list=new ArrayList<UserBean>();
+		conn=DbUtil.getConnection();
+		
+
+		String sql="Select * from user_details where user_id=?";
+		
+		PreparedStatement pst=conn.prepareStatement(sql);
+		
+		pst.setInt(1,bean.getUserId());
+		
+		
+		ResultSet rs=pst.executeQuery();
+		
+		while(rs.next())
+		{
+			
+			 
+			 accountId=rs.getLong(1);
+			
+		}
+		
+		list.add(new UserBean(accountId));	
+			
+		return list;
+	}
 	
 	
 		

@@ -87,6 +87,17 @@ public class BankingServiceImpl implements IBankingService {
 
 
 
+	@Override
+	public ArrayList<UserBean> getAccountId(UserBean bean) throws IOException, SQLException {
+		
+			dao=new BankingDaoImpl();
+		
+			return dao.getAccountId(bean);
+		
+	}
+
+
+
 	
 
 

@@ -27,4 +27,6 @@ public interface IBankingService {
 	
 	
 	public int updateLock(UserBean bean) throws IOException, SQLException;
+
+	public ArrayList<UserBean> getAccountId(UserBean bean) throws IOException, SQLException;
 }

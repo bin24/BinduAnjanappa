@@ -94,6 +94,11 @@ public class UserBean {
 		this.secretQuestion = secretQuestion;
 		this.secretQuestionAnswer = secretQuestionAnswer;
 	}
+	public UserBean(long accountId) {
+		super();
+		this.accountId = accountId;
+	}
+	
 	
 	
 	
