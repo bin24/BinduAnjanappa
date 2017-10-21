@@ -6,204 +6,98 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
-
-import java.util.ArrayList;
-
 import com.cg.banking.bean.UserBean;
-import com.cg.banking.dbUtil.DbUtil;
-
-
-
+import com.cg.banking.dbutil.DbUtil;
 
 public class BankingDaoImpl implements IBankingDao {
+      Connection conn;
+      int rows=0;
+	private int result;
+	private int flag = 0;
 	
-	Connection conn=null;
-	
-	
-
-	
-
-
+ 
 	@Override
-	public boolean checkLogin(UserBean bean) throws IOException, SQLException 
-	{
-		
-		
+	public int requestforcheckbook(UserBean u) throws SQLException, IOException {
+		    
 		conn=DbUtil.getConnection();
-		
-		
-		
-		
-		String sql="Select * from user_details where user_id=? and login_password=?";
-		
-		PreparedStatement pst=conn.prepareStatement(sql);
-		
-		pst.setInt(1,bean.getUserId());
-		pst.setString(2,bean.getLoginPassword());
-		
-		ResultSet rs=pst.executeQuery();
-		
-		if(rs.next()==false)
-		{
-			return false;
-		}
-		else
-		{		
-			if(rs.getString(7).equals("N"))
-			{
-				return false;
-			}
-			else
-			{
-				return true;
-			}
-			
-		}
-		
-		
-		
-		
-	}
-
-
-
-
-
-	@Override
-	public ArrayList<UserBean> changePassword(UserBean bean) throws IOException, SQLException
-	{
-		ArrayList<UserBean> list=new ArrayList<UserBean>();
-		conn=DbUtil.getConnection();
-		String secretQuestionAnswer="null";
-		String secretQuestion="null";
-
-		String sql="Select * from user_details where user_id=?";
-		
-		PreparedStatement pst=conn.prepareStatement(sql);
-		
-		pst.setInt(1,bean.getUserId());
-		
-		
-		ResultSet rs=pst.executeQuery();
-		
-		while(rs.next())
-		{
-			
+		 String result = null;
+	    // int acc_id;
+		 String sql1 = "select account_id from usertable";
+		 PreparedStatement ps2 = conn.prepareStatement(sql1);
+		 ResultSet rs = ps2.executeQuery();
+		 
+		 while(rs.next())
+    	 {
 			 
-			secretQuestion =rs.getString(4);
-			secretQuestionAnswer=rs.getString(5);
-			
-		}
+			 int acc_id = rs.getInt(1);
+			 
+				
+
+			 if(acc_id != (u.getAccountNo()))
+			 {
+				 flag  = 0;
+				
+				
+			 }
+			 else
+			 {
+				 flag = 1;
+			 }
+			 
 		
-		list.add(new UserBean(secretQuestion,secretQuestionAnswer));	
-			
-		return list;
-			
+    		
+    	 }
+		
+		 return  flag;
 	
 	}
 
 
-
-
-
 	@Override
-	public int updatePassword(UserBean bean) throws SQLException, IOException 
-	{
-		conn=DbUtil.getConnection();
-		String updateQuery="update user_details set login_password=? where user_id=?";
+	public int addDetails(UserBean u)  {
+		String insertquery= "Insert into Service_Tracker values(chk_book.nextval,?,?,sysdate,'Open') ";
 		
-		
-		
-		PreparedStatement ps=conn.prepareStatement(updateQuery);
-		
-		if(bean.getLoginPassword()==null)
-		{
-			ps.setString(1,"sbq500#");
+		PreparedStatement ps;
+		try {
 			
-			ps.setInt(2,bean.getUserId());
-		}
-		else
-		{
-			ps.setString(1,bean.getLoginPassword());
+			conn=DbUtil.getConnection();
+			ps = conn.prepareStatement(insertquery);
+			ps.setString(1,u.getService_Desc());
+			ps.setInt(2,u.getAccountNo());
+		    
+			rows = ps.executeUpdate();
 			
-			ps.setInt(2,bean.getUserId());
+			System.out.println("in addDetails"+rows);
+			
+			if(rows==1)
+			{
+			String sql = "Select chk_book.currval from dual ";
+			 PreparedStatement ps1 = conn.prepareStatement(sql);
+			 ResultSet rs = ps1.executeQuery();
+			 while(rs.next())
+	    	 {
+				 result = rs.getInt(1);
+	    		 System.out.println(result);
+	    	 }
+			
+			
+			
 		}
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+   
 		
-		
-		int result=ps.executeUpdate();
+		 }
+	
+	
 		return result;
-	}
-
-
-
-
-
-	@Override
-	public int updateLock(UserBean bean) throws IOException, SQLException {
-		
-		conn=DbUtil.getConnection();
-		String updateQuery="update user_details set lock_status=? where user_id=?";
-		
-		
-		
-		PreparedStatement ps=conn.prepareStatement(updateQuery);
-		
-		
 	
-			ps.setString(1,"N");
-			
-			ps.setInt(2,bean.getUserId());
-		
-		
-		
-		int lockResult=ps.executeUpdate();
-		return lockResult;
-		
-		
-		
+
 	}
-
-
-
-
-
-	@Override
-	public ArrayList<UserBean> getAccountId(UserBean bean) throws IOException, SQLException {
-		
-		long accountId=0;
-		
-		ArrayList<UserBean> list=new ArrayList<UserBean>();
-		conn=DbUtil.getConnection();
-		
-
-		String sql="Select * from user_details where user_id=?";
-		
-		PreparedStatement pst=conn.prepareStatement(sql);
-		
-		pst.setInt(1,bean.getUserId());
-		
-		
-		ResultSet rs=pst.executeQuery();
-		
-		while(rs.next())
-		{
-			
-			 
-			 accountId=rs.getLong(1);
-			
-		}
-		
-		list.add(new UserBean(accountId));	
-			
-		return list;
-	}
-	
-	
-		
-		
 }
-	
-	
-
-

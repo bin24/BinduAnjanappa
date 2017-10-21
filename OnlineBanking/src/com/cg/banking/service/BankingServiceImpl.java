@@ -2,108 +2,26 @@ package com.cg.banking.service;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import com.cg.banking.bean.UserBean;
 import com.cg.banking.dao.BankingDaoImpl;
 import com.cg.banking.dao.IBankingDao;
 
-
-
 public class BankingServiceImpl implements IBankingService {
+
+	IBankingDao imd =null;
 	
-	IBankingDao dao=null;
-
-	
-
-	@Override
-	public boolean checkLogin(UserBean bean) throws IOException, SQLException {
-		dao=new BankingDaoImpl();
+	public int requestforcheckbook(UserBean u) throws SQLException, IOException {
 		
-		return dao.checkLogin(bean);
+		imd = new BankingDaoImpl();
+		return imd.requestforcheckbook(u);
 	}
 
-
-
 	@Override
-	public ArrayList<UserBean> changePassword(UserBean bean) throws IOException, SQLException {
-		dao=new BankingDaoImpl();
-		
-		return dao.changePassword(bean);
+	public int addDetails(UserBean u) {
+		imd = new BankingDaoImpl();
+		return imd.addDetails(u);
 	}
-
-
-
-	@Override
-	public boolean checkSecurityAnswer(String securityQuestion,
-			String securityAnswer, String sAnswer) {
-		
-		if(securityAnswer.equals(sAnswer))
-		{
-			
-			return true;
-		}
-		else
-		{
-			
-			return false;
-		}
-		
-	}
-
-
-
-	@Override
-	public int updatePassword(UserBean bean) throws SQLException, IOException {
-		dao=new BankingDaoImpl();
-		
-		return dao.updatePassword(bean);
-	}
-
-
-
-	@Override
-	public boolean checkPassword(String newPassword, String reEnterNewPassword) {
-		
-		if(newPassword.equals(reEnterNewPassword))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-		
-	}
-
-
-
-	@Override
-	public int updateLock(UserBean bean) throws IOException, SQLException {
-		dao=new BankingDaoImpl();
-		
-		return dao.updateLock(bean);
-	}
-
-
-
-	@Override
-	public ArrayList<UserBean> getAccountId(UserBean bean) throws IOException, SQLException {
-		
-			dao=new BankingDaoImpl();
-		
-			return dao.getAccountId(bean);
-		
-	}
-
-
 
 	
-
-
-
-	
-
-	
-
 }
