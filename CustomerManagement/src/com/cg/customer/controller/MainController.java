@@ -71,20 +71,19 @@ public class MainController {
 	@RequestMapping("/insert")
 	public String addDetails(Model model)
 	{
+		model = setDataInModel(model);
+
 		model.addAttribute("cus",new Customer());
 		return "items/add";
 	}
 	Model setDataInModel(Model model){
-		Customer cus = new Customer();
+		
 	Map<String,String> country = new LinkedHashMap<String,String>();
 	country.put("US", "United Stated");
 	country.put("CHINA", "China");
 	country.put("SG", "Singapore");
 	country.put("MY", "Malaysia");
 	model.addAttribute("countrySet",country);
-	System.out.println(model);
-	
-	model.addAttribute("cus",cus);
 		return model;
 	}
 	
@@ -92,6 +91,7 @@ public class MainController {
 	public String addEmployeeDetails(@ModelAttribute("cus")@Valid Customer cus,BindingResult result,Model m){
 		
 		if(result.hasErrors()){
+			m = setDataInModel(m);
 			return "items/add";
 		}
 		else{

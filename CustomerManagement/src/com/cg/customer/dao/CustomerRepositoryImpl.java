@@ -32,8 +32,10 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 	@Override
 	public List<Customer> getAll() {
 				
-			TypedQuery<Customer> query = entityManager.createQuery("SELECT cust FROM Customer cust", Customer.class);
-			return query.getResultList();
+			//TypedQuery<Customer> query = entityManager.createQuery("SELECT cust FROM Customer cust", Customer.class);
+			Query q = entityManager.createNamedQuery("getAllCustomer");
+			return q.getResultList();
+			//return query.getResultList();
 	}
 
 	@Override

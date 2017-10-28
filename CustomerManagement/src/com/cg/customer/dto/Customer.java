@@ -16,7 +16,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "getAllCustomerId", query = "SELECT cust.custId FROM Customer cust")
+	@NamedQuery(name = "getAllCustomerId", query = "SELECT cust.custId FROM Customer cust"),
+	@NamedQuery(name = "getAllCustomer", query = "SELECT cust FROM Customer cust")
 })
 public class Customer implements Serializable{
 	
